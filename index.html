@@ -1,805 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexus — The Future of Work</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
-            syne: ['Syne', 'sans-serif'],
-          },
-          colors: {
-            void: '#030303',
-            'electric-blue': '#00d2ff',
-            'vivid-purple': '#9d50bb',
-          },
-        },
-      },
-    };
-  </script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jataka Porutham — Yashwant & Nikitha</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8b1a1a;
+    --crimson-light: #c94040;
+    --amber: #d4a017;
+    --amber-light: #f0c84a;
+    --deep: #0a0a14;
+    --mid: #12101e;
+    --surface: #1a1828;
+    --card: #201e30;
+    --text: #ede8f5;
+    --muted: #8880a0;
+    --green: #3a9e6a;
+    --red: #c84040;
+    --violet: #6a4a9e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'EB Garamond', serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 15% 0%, rgba(139,26,26,0.2) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 100%, rgba(106,74,158,0.18) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(212,160,23,0.04) 0%, transparent 70%);
+  }
+  .container { max-width:840px; margin:0 auto; padding:40px 20px 60px; }
 
-    :root {
-      --blue: #00d2ff;
-      --purple: #9d50bb;
-      --bg: #030303;
-      --glass-bg: rgba(255,255,255,0.04);
-      --glass-border: rgba(255,255,255,0.09);
-    }
+  /* Header */
+  .header {
+    text-align:center;
+    padding: 50px 20px 36px;
+  }
+  .header .om {
+    font-size:2.2rem;
+    color: var(--amber);
+    opacity:0.7;
+    margin-bottom:16px;
+    letter-spacing:16px;
+  }
+  .header h1 {
+    font-family:'Cinzel Decorative', serif;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: var(--amber-light);
+    line-height:1.4;
+    letter-spacing:2px;
+  }
+  .header .names {
+    font-family:'Cinzel', serif;
+    font-size: clamp(1.4rem, 5vw, 2.4rem);
+    margin-top:10px;
+    color: var(--text);
+  }
+  .header .names span { color: var(--amber); }
+  .header .subtitle {
+    font-style:italic;
+    color:var(--muted);
+    font-size:1.05rem;
+    margin-top:10px;
+  }
 
-    html { scroll-behavior: smooth; }
+  /* Ornamental divider */
+  .divider {
+    display:flex; align-items:center; gap:14px;
+    margin: 28px 0; opacity:0.45;
+  }
+  .divider::before,.divider::after {
+    content:''; flex:1; height:1px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  }
+  .divider span { color:var(--amber); font-size:0.85rem; letter-spacing:8px; }
 
-    body {
-      background-color: var(--bg);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: #e2e8f0;
-      overflow-x: hidden;
-    }
+  /* Profile Cards */
+  .profiles { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:28px; }
+  @media(max-width:580px){ .profiles{ grid-template-columns:1fr; } }
 
-    /* ─── MOVING MESH BACKGROUND ──────────────────────────────── */
-    .mesh-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background: var(--bg);
-      overflow: hidden;
-    }
-    .mesh-bg::before {
-      content: '';
-      position: absolute;
-      inset: -50%;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 20%, rgba(0,210,255,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 70% 70% at 80% 80%, rgba(157,80,187,0.14) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,210,255,0.04) 0%, transparent 70%);
-      animation: meshDrift 18s ease-in-out infinite alternate;
-    }
-    .mesh-bg::after {
-      content: '';
-      position: absolute;
-      inset: -50%;
-      background:
-        radial-gradient(ellipse 60% 80% at 75% 25%, rgba(157,80,187,0.10) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 40% at 25% 75%, rgba(0,210,255,0.08) 0%, transparent 55%);
-      animation: meshDrift2 22s ease-in-out infinite alternate;
-    }
-    @keyframes meshDrift {
-      0%   { transform: translate(0,0) scale(1); }
-      33%  { transform: translate(3%,2%) scale(1.04); }
-      66%  { transform: translate(-2%,4%) scale(0.97); }
-      100% { transform: translate(4%,-3%) scale(1.06); }
-    }
-    @keyframes meshDrift2 {
-      0%   { transform: translate(0,0) scale(1.02); }
-      50%  { transform: translate(-4%, 3%) scale(0.96); }
-      100% { transform: translate(3%,-4%) scale(1.05); }
-    }
+  .profile-card {
+    background: var(--card);
+    border:1px solid rgba(212,160,23,0.2);
+    border-radius:18px;
+    padding:28px 22px;
+    position:relative; overflow:hidden;
+  }
+  .profile-card::after {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  }
+  .profile-card .symbol { font-size:2.6rem; margin-bottom:10px; display:block; }
+  .profile-card h3 {
+    font-family:'Cinzel', serif;
+    font-size:1.15rem;
+    color:var(--amber-light);
+    margin-bottom:16px;
+    letter-spacing:1px;
+  }
+  .detail {
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05);
+    font-size:0.95rem;
+  }
+  .detail:last-child{ border-bottom:none; }
+  .label { color:var(--muted); font-style:italic; }
+  .value { color:var(--text); text-align:right; }
 
-    /* Noise grain overlay */
-    .grain {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.028;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-    }
+  /* Score */
+  .score-wrap {
+    background: var(--card);
+    border:1px solid rgba(212,160,23,0.35);
+    border-radius:22px;
+    padding:40px 28px;
+    text-align:center;
+    margin-bottom:28px;
+    position:relative; overflow:hidden;
+  }
+  .score-wrap::before {
+    content:'शुभ';
+    position:absolute; font-family:'Cinzel',serif;
+    font-size:9rem; opacity:0.04;
+    color:var(--amber); left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .score-wrap h2 {
+    font-family:'Cinzel',serif;
+    font-size:0.82rem; letter-spacing:5px;
+    color:var(--muted); text-transform:uppercase;
+    margin-bottom:20px;
+  }
+  .big-score {
+    font-family:'Cinzel Decorative',serif;
+    font-size: clamp(3.2rem, 10vw, 5.5rem);
+    color:var(--amber-light); line-height:1;
+    margin-bottom:6px;
+  }
+  .score-tag {
+    font-size:1.5rem; font-style:italic;
+    color:var(--amber); margin-bottom:20px;
+  }
+  .bar-track {
+    background:rgba(255,255,255,0.07);
+    border-radius:50px; height:10px;
+    max-width:440px; margin:0 auto 14px; overflow:hidden;
+  }
+  .bar-fill {
+    height:100%; width:0;
+    background: linear-gradient(90deg, var(--crimson-light), var(--amber));
+    border-radius:50px;
+    animation: grow 1.5s ease forwards;
+  }
+  @keyframes grow { to { width: 72.2% } }
+  .score-note { color:var(--muted); font-style:italic; font-size:1rem; }
 
-    /* ─── GLASSMORPHISM BASE ───────────────────────────────────── */
-    .glass {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-    }
+  /* Porutham rows */
+  .section-title {
+    font-family:'Cinzel',serif;
+    font-size:0.85rem; letter-spacing:5px;
+    color:var(--muted); text-transform:uppercase;
+    text-align:center; margin-bottom:18px;
+  }
+  .por-grid { display:grid; gap:11px; margin-bottom:28px; }
+  .por-row {
+    background:var(--card);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:13px;
+    padding:15px 20px;
+    display:grid;
+    grid-template-columns:2fr 1.1fr 2.2fr;
+    gap:12px; align-items:center;
+    transition:border-color 0.2s;
+  }
+  .por-row:hover{ border-color:rgba(212,160,23,0.3); }
+  .por-name {
+    font-family:'Cinzel',serif;
+    font-size:0.87rem; letter-spacing:0.5px; color:var(--text);
+  }
+  .por-sub { font-style:italic; color:var(--muted); font-size:0.78rem; margin-top:3px; }
+  .badge {
+    text-align:center; padding:6px 10px;
+    border-radius:20px; font-size:0.83rem;
+    font-family:'Cinzel',serif; letter-spacing:0.5px; font-weight:600;
+  }
+  .match   { background:rgba(58,158,106,0.16); color:#72e0a0; border:1px solid rgba(58,158,106,0.35); }
+  .partial { background:rgba(212,160,23,0.14); color:var(--amber-light); border:1px solid rgba(212,160,23,0.3); }
+  .nomatch { background:rgba(200,64,64,0.14); color:#f08888; border:1px solid rgba(200,64,64,0.28); }
+  .excel   { background:rgba(106,74,158,0.2); color:#c0a0f0; border:1px solid rgba(106,74,158,0.4); }
+  .por-desc { font-size:0.88rem; color:var(--muted); font-style:italic; line-height:1.55; }
 
-    /* ─── NAV ──────────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 100;
-      width: calc(100% - 40px);
-      max-width: 1100px;
-      border-radius: 16px;
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      animation: fadeInDown 0.7s ease both;
-    }
-    @keyframes fadeInDown {
-      from { opacity:0; transform: translateX(-50%) translateY(-18px); }
-      to   { opacity:1; transform: translateX(-50%) translateY(0); }
-    }
+  /* Detail cards */
+  .d-card {
+    background:var(--card);
+    border:1px solid rgba(212,160,23,0.18);
+    border-radius:17px;
+    padding:28px 24px;
+    margin-bottom:20px;
+  }
+  .d-card h3 {
+    font-family:'Cinzel',serif;
+    color:var(--amber); font-size:0.95rem;
+    letter-spacing:2px; margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .d-card p { line-height:1.85; font-size:1rem; color:#ccc5e0; }
+  .hl { color:var(--amber-light); font-style:italic; }
+  .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .tag {
+    background:rgba(106,74,158,0.18);
+    border:1px solid rgba(106,74,158,0.38);
+    color:#b8a8d8;
+    border-radius:20px; padding:5px 14px;
+    font-size:0.82rem; font-style:italic;
+  }
 
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.3rem;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.02em;
-    }
+  /* Verdict */
+  .verdict {
+    background: linear-gradient(135deg, rgba(139,26,26,0.25), rgba(212,160,23,0.12));
+    border:1px solid rgba(212,160,23,0.45);
+    border-radius:20px; padding:34px 28px;
+    margin-bottom:28px; text-align:center;
+  }
+  .verdict h3 {
+    font-family:'Cinzel Decorative',serif;
+    color:var(--amber-light); font-size:1.1rem;
+    margin-bottom:16px; letter-spacing:2px;
+  }
+  .verdict p { font-size:1.05rem; line-height:1.85; color:#ddd5f0; }
 
-    .nav-links a {
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-left: 28px;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #fff; }
+  /* Nakshatra warning */
+  .warning-card {
+    background:rgba(200,64,64,0.1);
+    border:1px solid rgba(200,64,64,0.3);
+    border-radius:14px; padding:22px 22px;
+    margin-bottom:20px;
+  }
+  .warning-card h3 {
+    font-family:'Cinzel',serif;
+    color:#f08888; font-size:0.9rem;
+    letter-spacing:2px; margin-bottom:10px;
+  }
+  .warning-card p { font-size:0.95rem; line-height:1.75; color:#e0c0c0; }
 
-    /* Spinning conic-gradient border button */
-    .conic-btn-wrapper {
-      position: relative;
-      border-radius: 12px;
-      padding: 2px;
-      background: conic-gradient(from var(--angle, 0deg), var(--blue), var(--purple), #ff6eb4, var(--blue));
-      animation: spinBorder 3s linear infinite;
-    }
-    @property --angle {
-      syntax: '<angle>';
-      initial-value: 0deg;
-      inherits: false;
-    }
-    @keyframes spinBorder {
-      to { --angle: 360deg; }
-    }
-    .conic-btn {
-      display: block;
-      background: #0a0a0f;
-      color: #fff;
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 9px 20px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      letter-spacing: 0.02em;
-      transition: background 0.2s;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-    .conic-btn:hover { background: #111118; }
-
-    /* ─── ANIMATIONS ───────────────────────────────────────────── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s ease forwards;
-    }
-    @keyframes fadeInUp {
-      to { opacity:1; transform: translateY(0); }
-    }
-    .delay-1 { animation-delay: 0.15s; }
-    .delay-2 { animation-delay: 0.3s; }
-    .delay-3 { animation-delay: 0.45s; }
-    .delay-4 { animation-delay: 0.6s; }
-    .delay-5 { animation-delay: 0.75s; }
-    .delay-6 { animation-delay: 0.9s; }
-
-    /* ─── HERO TEXT MASK ANIMATION ────────────────────────────── */
-    .gradient-text {
-      background: linear-gradient(
-        90deg,
-        var(--blue) 0%,
-        var(--purple) 30%,
-        #ff6eb4 60%,
-        var(--blue) 100%
-      );
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: textGradientShift 5s ease-in-out infinite;
-    }
-    @keyframes textGradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ─── HERO CTA ─────────────────────────────────────────────── */
-    .hero-cta {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 36px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      color: #fff;
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.01em;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.3s;
-      box-shadow: 0 0 0px rgba(0,210,255,0);
-    }
-    .hero-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(0,210,255,0.35), 0 0 80px rgba(157,80,187,0.2);
-    }
-    .hero-cta::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      filter: blur(16px);
-      opacity: 0;
-      z-index: -1;
-      transition: opacity 0.3s;
-    }
-    .hero-cta:hover::after { opacity: 0.55; }
-
-    .secondary-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 28px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.75);
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .secondary-cta:hover {
-      border-color: rgba(0,210,255,0.4);
-      color: #fff;
-      background: rgba(0,210,255,0.06);
-    }
-
-    /* ─── BENTO GRID ───────────────────────────────────────────── */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: auto auto;
-      gap: 16px;
-    }
-    @media (max-width: 768px) {
-      .bento-grid { grid-template-columns: 1fr; }
-    }
-
-    .bento-card {
-      border-radius: 20px;
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
-      cursor: default;
-    }
-    .bento-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(0,210,255,0.06);
-    }
-    .bento-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at var(--mx,50%) var(--my,30%), rgba(0,210,255,0.07) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .bento-card:hover::before { opacity: 1; }
-
-    /* wide card spans 2 cols */
-    .bento-wide {
-      grid-column: span 2;
-    }
-    @media (max-width: 768px) {
-      .bento-wide { grid-column: span 1; }
-    }
-
-    .card-icon-ring {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, rgba(0,210,255,0.15), rgba(157,80,187,0.15));
-      border: 1px solid rgba(0,210,255,0.2);
-    }
-
-    /* ─── NEON DIVIDER ─────────────────────────────────────────── */
-    .neon-divider {
-      position: relative;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue), var(--purple), transparent);
-      margin: 0;
-    }
-    .neon-divider::before {
-      content: '';
-      position: absolute;
-      inset: -3px 10%;
-      background: linear-gradient(90deg, transparent, var(--blue), var(--purple), transparent);
-      filter: blur(8px);
-      opacity: 0.6;
-    }
-
-    /* SVG Wave */
-    .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; }
-
-    /* ─── STATS ROW ────────────────────────────────────────────── */
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 2.8rem;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-    }
-
-    /* ─── PRICING BADGE ────────────────────────────────────────── */
-    .badge {
-      display: inline-block;
-      padding: 5px 14px;
-      border-radius: 99px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, rgba(0,210,255,0.15), rgba(157,80,187,0.15));
-      border: 1px solid rgba(0,210,255,0.25);
-      color: var(--blue);
-    }
-
-    /* ─── TESTIMONIAL CARD ─────────────────────────────────────── */
-    .testimonial-quote {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.7);
-    }
-    .avatar-ring {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    /* ─── FOOTER ───────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--glass-border);
-      background: rgba(255,255,255,0.015);
-    }
-    .footer-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .footer-link {
-      color: rgba(255,255,255,0.45);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 400;
-      display: block;
-      margin-bottom: 10px;
-      transition: color 0.2s;
-    }
-    .footer-link:hover { color: rgba(255,255,255,0.85); }
-    .footer-heading {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      margin-bottom: 18px;
-    }
-
-    /* ─── SCROLL REVEAL ────────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── MISC ─────────────────────────────────────────────────── */
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--blue);
-      opacity: 0.8;
-    }
-
-    .glow-dot {
-      display: inline-block;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 8px #22c55e, 0 0 20px rgba(34,197,94,0.4);
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(0.85); }
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(var(--blue), var(--purple));
-      border-radius: 99px;
-    }
-
-    /* page wrapper */
-    .page { position: relative; z-index: 2; }
-  </style>
+  .footer {
+    text-align:center; padding:36px 20px;
+    color:var(--muted); font-style:italic; font-size:0.88rem;
+    border-top:1px solid rgba(212,160,23,0.12);
+  }
+  .footer strong{ color:var(--amber); font-style:normal; }
+</style>
 </head>
-<body class="font-jakarta">
+<body>
+<div class="container">
 
-  <!-- Mesh Background -->
-  <div class="mesh-bg"></div>
-  <div class="grain"></div>
+  <div class="header">
+    <div class="om">✧ ॐ ✧</div>
+    <h1>Jataka Porutham</h1>
+    <div class="names"><span>Yashwant</span> &amp; <span>Nikitha</span></div>
+    <div class="subtitle">Vedic Astrology Compatibility — South Indian Tradition</div>
+  </div>
 
-  <!-- ─── NAV ─────────────────────────────────────────────── -->
-  <nav class="glass">
-    <span class="nav-logo">Nexus</span>
+  <div class="divider"><span>✦</span></div>
 
-    <div class="nav-links hidden md:flex items-center">
-      <a href="#">Product</a>
-      <a href="#">Solutions</a>
-      <a href="#">Docs</a>
-      <a href="#">Pricing</a>
+  <!-- Profiles -->
+  <div class="profiles">
+    <div class="profile-card">
+      <span class="symbol">♂</span>
+      <h3>Yashwant — Groom</h3>
+      <div class="detail"><span class="label">Date of Birth</span><span class="value">31 Dec 2005</span></div>
+      <div class="detail"><span class="label">Nakshatra</span><span class="value">Mula ★</span></div>
+      <div class="detail"><span class="label">Nakshatra Lord</span><span class="value">Ketu</span></div>
+      <div class="detail"><span class="label">Rashi</span><span class="value">Dhanus ♐</span></div>
+      <div class="detail"><span class="label">Rashi Lord</span><span class="value">Guru (Jupiter)</span></div>
+      <div class="detail"><span class="label">Element</span><span class="value">Fire (Agni)</span></div>
+      <div class="detail"><span class="label">Gana</span><span class="value">Rakshasa Gana</span></div>
+    </div>
+    <div class="profile-card">
+      <span class="symbol">♀</span>
+      <h3>Nikitha — Bride</h3>
+      <div class="detail"><span class="label">Date of Birth</span><span class="value">28 Sep 2006</span></div>
+      <div class="detail"><span class="label">Nakshatra</span><span class="value">Anuradha ★</span></div>
+      <div class="detail"><span class="label">Nakshatra Lord</span><span class="value">Shani (Saturn)</span></div>
+      <div class="detail"><span class="label">Rashi</span><span class="value">Vrishchika ♏ (Scorpio)</span></div>
+      <div class="detail"><span class="label">Rashi Lord</span><span class="value">Mangal (Mars)</span></div>
+      <div class="detail"><span class="label">Element</span><span class="value">Water (Jala)</span></div>
+      <div class="detail"><span class="label">Gana</span><span class="value">Deva Gana</span></div>
+    </div>
+  </div>
+
+  <!-- Score -->
+  <div class="score-wrap">
+    <h2>Overall Compatibility Score</h2>
+    <div class="big-score">26 / 36</div>
+    <div class="score-tag">Uttama Madhyama — Good Match</div>
+    <div class="bar-track"><div class="bar-fill"></div></div>
+    <p class="score-note">72% compatibility — Above average; favorable for marriage with key conditions met</p>
+  </div>
+
+  <div class="divider"><span>✦</span></div>
+
+  <!-- 10 Poruthams -->
+  <div class="section-title">Dasa Porutham — The Ten Compatibilities</div>
+  <div class="por-grid">
+
+    <div class="por-row">
+      <div>
+        <div class="por-name">1. Dina Porutham</div>
+        <div class="por-sub">Health & daily harmony</div>
+      </div>
+      <div class="badge match">Match ✓</div>
+      <div class="por-desc">Mula (19th) to Anuradha (17th) count is auspicious in the Dina cycle — good health prospects and daily life harmony.</div>
     </div>
 
-    <div class="flex items-center gap-3">
-      <a href="#" class="hidden md:block text-sm font-medium" style="color:rgba(255,255,255,0.55); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Sign in</a>
-      <div class="conic-btn-wrapper">
-        <a href="#" class="conic-btn">Get Started</a>
+    <div class="por-row">
+      <div>
+        <div class="por-name">2. Gana Porutham</div>
+        <div class="por-sub">Temperament & nature</div>
       </div>
-    </div>
-  </nav>
-
-  <!-- ─── PAGE WRAPPER ────────────────────────────────────── -->
-  <div class="page">
-
-    <!-- ─── HERO ─────────────────────────────────────────── -->
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-24">
-
-      <!-- Live pill -->
-      <div class="fade-up delay-1 mb-8">
-        <div class="glass inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-medium" style="color:rgba(255,255,255,0.65);">
-          <span class="glow-dot"></span>
-          Now in public beta &mdash; 3,200+ teams onboard
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </div>
-
-      <!-- Headline -->
-      <h1 class="fade-up delay-2 font-syne font-extrabold leading-none tracking-tight mb-6" style="font-size: clamp(2.8rem, 8vw, 7rem); max-width: 900px;">
-        Build. Ship.<br>
-        <span class="gradient-text">Dominate.</span>
-      </h1>
-
-      <!-- Subheadline -->
-      <p class="fade-up delay-3 text-lg md:text-xl mb-12 max-w-xl" style="color:rgba(255,255,255,0.5); line-height:1.7;">
-        The AI-native platform that turns ideas into production-grade software. Zero friction. Infinite scale.
-      </p>
-
-      <!-- CTA Row -->
-      <div class="fade-up delay-4 flex flex-col sm:flex-row gap-4 items-center">
-        <a href="#" class="hero-cta">
-          Start for free
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#" class="secondary-cta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
-          Watch demo
-        </a>
-      </div>
-
-      <!-- Social proof -->
-      <div class="fade-up delay-5 mt-14 flex flex-col items-center gap-3">
-        <div class="flex -space-x-2">
-          <div class="avatar-ring text-xs" style="width:36px;height:36px;font-size:0.7rem">AK</div>
-          <div class="avatar-ring text-xs" style="width:36px;height:36px;font-size:0.7rem;background:linear-gradient(135deg,#ff6eb4,#9d50bb)">ML</div>
-          <div class="avatar-ring text-xs" style="width:36px;height:36px;font-size:0.7rem;background:linear-gradient(135deg,#9d50bb,#00d2ff)">RJ</div>
-          <div class="avatar-ring text-xs" style="width:36px;height:36px;font-size:0.7rem;background:linear-gradient(135deg,#00d2ff,#ff6eb4)">SY</div>
-          <div class="w-9 h-9 rounded-full glass flex items-center justify-center text-xs font-bold" style="color:rgba(255,255,255,0.6)">+k</div>
-        </div>
-        <p class="text-sm" style="color:rgba(255,255,255,0.35)">Trusted by engineers at Stripe, Vercel, Linear, and Notion</p>
-      </div>
-
-      <!-- Hero glow orbs -->
-      <div style="position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,210,255,0.07),transparent);pointer-events:none;z-index:-1;"></div>
-    </section>
-
-    <!-- ─── STATS ──────────────────────────────────────────── -->
-    <section class="px-6 pb-24 reveal">
-      <div class="max-w-5xl mx-auto">
-        <div class="glass rounded-2xl p-8 md:p-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div class="stat-num">99.9<span style="font-size:1.5rem">%</span></div>
-            <p class="text-sm mt-2" style="color:rgba(255,255,255,0.4)">Uptime SLA</p>
-          </div>
-          <div>
-            <div class="stat-num">4.2<span style="font-size:1.5rem">M</span></div>
-            <p class="text-sm mt-2" style="color:rgba(255,255,255,0.4)">Deployments</p>
-          </div>
-          <div>
-            <div class="stat-num">18<span style="font-size:1.5rem">ms</span></div>
-            <p class="text-sm mt-2" style="color:rgba(255,255,255,0.4)">Avg. Latency</p>
-          </div>
-          <div>
-            <div class="stat-num">150<span style="font-size:1.5rem">+</span></div>
-            <p class="text-sm mt-2" style="color:rgba(255,255,255,0.4)">Edge Regions</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── NEON DIVIDER ───────────────────────────────────── -->
-    <div class="neon-divider mx-6 md:mx-24 reveal"></div>
-
-    <!-- ─── FEATURES BENTO ────────────────────────────────── -->
-    <section class="px-6 py-24 max-w-6xl mx-auto reveal">
-      <div class="text-center mb-14">
-        <p class="section-label mb-4">Platform Features</p>
-        <h2 class="font-syne font-extrabold text-3xl md:text-5xl tracking-tight mb-4" style="color:#f1f5f9;">Everything you need.<br><span style="color:rgba(255,255,255,0.3)">Nothing you don't.</span></h2>
-        <p class="max-w-lg mx-auto text-base" style="color:rgba(255,255,255,0.45);">One unified platform to design, build, and deploy at the speed of thought.</p>
-      </div>
-
-      <div class="bento-grid">
-
-        <!-- Card 1 — Wide -->
-        <div class="bento-card glass bento-wide reveal">
-          <div class="card-icon-ring">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#grad1)" stroke-width="1.8">
-              <defs><linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d2ff"/><stop offset="100%" stop-color="#9d50bb"/></linearGradient></defs>
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-          </div>
-          <div class="flex flex-col md:flex-row md:items-start gap-6">
-            <div class="flex-1">
-              <h3 class="font-syne font-bold text-xl mb-3" style="color:#f1f5f9;">AI-Powered Code Engine</h3>
-              <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.5);">Our LLM runtime understands your entire codebase and generates context-aware, production-ready code in milliseconds. Not just autocomplete — true co-authorship at scale.</p>
-            </div>
-            <div class="glass rounded-xl p-4 min-w-64" style="font-family:monospace;font-size:0.78rem;line-height:1.7;">
-              <p style="color:rgba(255,255,255,0.25)">// nexus generate</p>
-              <p style="color:#00d2ff;">const</p> <span style="color:#f1f5f9;">api</span> <span style="color:rgba(255,255,255,0.4)">=</span> <span style="color:#9d50bb;">nexus</span><span style="color:rgba(255,255,255,0.5)">.create(</span><span style="color:#ff6eb4;">"REST"</span><span style="color:rgba(255,255,255,0.5)">)</span><br>
-              <p><span style="color:#00d2ff;">await</span> <span style="color:#f1f5f9;">api</span><span style="color:rgba(255,255,255,0.5)">.deploy(</span><span style="color:#ff6eb4;">"prod"</span><span style="color:rgba(255,255,255,0.5)">)</span></p>
-              <p style="color:rgba(34,197,94,0.8)">✓ Deployed in 1.2s</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="bento-card glass reveal">
-          <div class="card-icon-ring">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#grad2)" stroke-width="1.8">
-              <defs><linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d2ff"/><stop offset="100%" stop-color="#ff6eb4"/></linearGradient></defs>
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
-            </svg>
-          </div>
-          <h3 class="font-syne font-bold text-xl mb-3" style="color:#f1f5f9;">Infinite Edge Network</h3>
-          <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.5);">Deploy to 150+ edge locations simultaneously. Your users get &lt;20ms response times worldwide, every single time.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="badge">Global CDN</span>
-            <span class="badge" style="color:var(--purple);border-color:rgba(157,80,187,0.3);background:rgba(157,80,187,0.12)">Auto-Scale</span>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="bento-card glass reveal">
-          <div class="card-icon-ring">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="url(#grad3)" stroke-width="1.8">
-              <defs><linearGradient id="grad3" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#9d50bb"/><stop offset="100%" stop-color="#00d2ff"/></linearGradient></defs>
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
-          <h3 class="font-syne font-bold text-xl mb-3" style="color:#f1f5f9;">Zero-Trust Security</h3>
-          <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.5);">End-to-end encryption, SOC 2 Type II certified, and continuous compliance scanning baked directly into your CI/CD pipeline.</p>
-          <div class="flex gap-3 mt-2">
-            <div class="text-center">
-              <div class="text-lg font-bold" style="color:var(--blue)">SOC2</div>
-              <div class="text-xs" style="color:rgba(255,255,255,0.3)">Certified</div>
-            </div>
-            <div style="width:1px;background:var(--glass-border)"></div>
-            <div class="text-center">
-              <div class="text-lg font-bold" style="color:var(--purple)">GDPR</div>
-              <div class="text-xs" style="color:rgba(255,255,255,0.3)">Compliant</div>
-            </div>
-            <div style="width:1px;background:var(--glass-border)"></div>
-            <div class="text-center">
-              <div class="text-lg font-bold" style="color:#ff6eb4">HIPAA</div>
-              <div class="text-xs" style="color:rgba(255,255,255,0.3)">Ready</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ─── SVG WAVE DIVIDER ───────────────────────────────── -->
-    <div class="wave-divider reveal" style="margin: 0; padding: 0;">
-      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px;">
-        <defs>
-          <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="transparent"/>
-            <stop offset="30%" stop-color="#00d2ff" stop-opacity="0.35"/>
-            <stop offset="70%" stop-color="#9d50bb" stop-opacity="0.35"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </linearGradient>
-        </defs>
-        <path d="M0,40 C240,70 480,10 720,40 C960,70 1200,15 1440,40 L1440,80 L0,80 Z" fill="rgba(0,210,255,0.03)"/>
-        <path d="M0,40 C240,70 480,10 720,40 C960,70 1200,15 1440,40" fill="none" stroke="url(#waveGrad)" stroke-width="1.5"/>
-      </svg>
+      <div class="badge partial">Partial ⚡</div>
+      <div class="por-desc">Yashwant is Rakshasa Gana; Nikitha is Deva Gana. This is a Deva–Rakshasa pairing — traditionally considered conditional. Acceptable only if boy is Rakshasa and girl is Deva (which is the case here), making it borderline acceptable.</div>
     </div>
 
-    <!-- ─── TESTIMONIALS ───────────────────────────────────── -->
-    <section class="px-6 py-24 max-w-6xl mx-auto reveal">
-      <div class="text-center mb-14">
-        <p class="section-label mb-4">Testimonials</p>
-        <h2 class="font-syne font-extrabold text-3xl md:text-5xl tracking-tight" style="color:#f1f5f9;">Loved by builders.</h2>
+    <div class="por-row">
+      <div>
+        <div class="por-name">3. Mahendra Porutham</div>
+        <div class="por-sub">Prosperity & progeny</div>
       </div>
+      <div class="badge match">Match ✓</div>
+      <div class="por-desc">Mula to Anuradha count falls in an auspicious Mahendra position — wealth, children, and long-term stability are indicated.</div>
+    </div>
 
-      <div class="grid md:grid-cols-3 gap-5">
-        <div class="bento-card glass">
-          <p class="testimonial-quote mb-6">"Nexus cut our deployment cycle from 2 weeks to 4 hours. Our engineers finally have time to build things that matter."</p>
-          <div class="flex items-center gap-3">
-            <div class="avatar-ring">AK</div>
-            <div>
-              <div class="text-sm font-semibold" style="color:#f1f5f9;">Arya Kapoor</div>
-              <div class="text-xs" style="color:rgba(255,255,255,0.35);">CTO at Volta Systems</div>
-            </div>
-          </div>
-        </div>
-        <div class="bento-card glass">
-          <p class="testimonial-quote mb-6">"The edge network is insane. We went from 400ms average latency to under 18ms globally. Our users noticed immediately."</p>
-          <div class="flex items-center gap-3">
-            <div class="avatar-ring" style="background:linear-gradient(135deg,#ff6eb4,#9d50bb)">ML</div>
-            <div>
-              <div class="text-sm font-semibold" style="color:#f1f5f9;">Marcus Lee</div>
-              <div class="text-xs" style="color:rgba(255,255,255,0.35);">Staff Eng. at Prism</div>
-            </div>
-          </div>
-        </div>
-        <div class="bento-card glass">
-          <p class="testimonial-quote mb-6">"Best DX I've used in a decade. It feels like someone actually thought about what engineers need instead of what looks good on a slide."</p>
-          <div class="flex items-center gap-3">
-            <div class="avatar-ring" style="background:linear-gradient(135deg,#00d2ff,#9d50bb)">RJ</div>
-            <div>
-              <div class="text-sm font-semibold" style="color:#f1f5f9;">Riya Joshi</div>
-              <div class="text-xs" style="color:rgba(255,255,255,0.35);">Founder, Drift Labs</div>
-            </div>
-          </div>
-        </div>
+    <div class="por-row">
+      <div>
+        <div class="por-name">4. Sthree Deergha</div>
+        <div class="por-sub">Bride's longevity</div>
       </div>
-    </section>
+      <div class="badge match">Match ✓</div>
+      <div class="por-desc">The nakshatra distance exceeds the required 7 stars from bride to groom — ensures Nikitha's well-being and long married life.</div>
+    </div>
 
-    <!-- ─── CTA BAND ───────────────────────────────────────── -->
-    <section class="px-6 py-24 reveal">
-      <div class="max-w-4xl mx-auto text-center glass rounded-3xl p-12 md:p-20 relative overflow-hidden">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,210,255,0.07),transparent);pointer-events:none;"></div>
-        <p class="section-label mb-5">Ready?</p>
-        <h2 class="font-syne font-extrabold text-3xl md:text-5xl tracking-tight mb-6" style="color:#f1f5f9;">Ship your next idea<br><span class="gradient-text">10× faster.</span></h2>
-        <p class="mb-10 text-base md:text-lg max-w-md mx-auto" style="color:rgba(255,255,255,0.45);">Join thousands of teams already building the future. No credit card required.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#" class="hero-cta">
-            Start building free
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="#" class="secondary-cta">Talk to sales</a>
-        </div>
+    <div class="por-row">
+      <div>
+        <div class="por-name">5. Yoni Porutham</div>
+        <div class="por-sub">Physical compatibility</div>
       </div>
-    </section>
+      <div class="badge match">Match ✓</div>
+      <div class="por-desc">Mula's Yoni is Dog (Shvana) and Anuradha's Yoni is Deer (Mriga) — these are neutral Yonis. Natural physical affinity and instinctual harmony.</div>
+    </div>
 
-    <!-- ─── FOOTER ────────────────────────────────────────── -->
-    <footer class="px-6 pt-16 pb-10 reveal">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
-          <!-- Col 1 -->
-          <div class="col-span-2 md:col-span-1">
-            <div class="footer-logo mb-4">Nexus</div>
-            <p class="text-sm mb-5" style="color:rgba(255,255,255,0.35);line-height:1.7;">The platform for teams who ship fast and break nothing.</p>
-            <div class="flex gap-3">
-              <!-- X/Twitter -->
-              <a href="#" class="glass w-9 h-9 rounded-lg flex items-center justify-center transition-all" style="color:rgba(255,255,255,0.4)" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.845L2 2.25h6.963l4.26 5.632L18.244 2.25z"/></svg>
-              </a>
-              <!-- GitHub -->
-              <a href="#" class="glass w-9 h-9 rounded-lg flex items-center justify-center transition-all" style="color:rgba(255,255,255,0.4)" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
-              </a>
-              <!-- Discord -->
-              <a href="#" class="glass w-9 h-9 rounded-lg flex items-center justify-center transition-all" style="color:rgba(255,255,255,0.4)" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
-              </a>
-            </div>
-          </div>
-          <!-- Col 2 -->
-          <div>
-            <p class="footer-heading">Product</p>
-            <a href="#" class="footer-link">Features</a>
-            <a href="#" class="footer-link">Pricing</a>
-            <a href="#" class="footer-link">Changelog</a>
-            <a href="#" class="footer-link">Roadmap</a>
-            <a href="#" class="footer-link">Status</a>
-          </div>
-          <!-- Col 3 -->
-          <div>
-            <p class="footer-heading">Developers</p>
-            <a href="#" class="footer-link">Documentation</a>
-            <a href="#" class="footer-link">API Reference</a>
-            <a href="#" class="footer-link">SDK</a>
-            <a href="#" class="footer-link">CLI</a>
-            <a href="#" class="footer-link">GitHub</a>
-          </div>
-          <!-- Col 4 -->
-          <div>
-            <p class="footer-heading">Company</p>
-            <a href="#" class="footer-link">About</a>
-            <a href="#" class="footer-link">Blog</a>
-            <a href="#" class="footer-link">Careers</a>
-            <a href="#" class="footer-link">Privacy</a>
-            <a href="#" class="footer-link">Terms</a>
-          </div>
-        </div>
-
-        <!-- Bottom bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8" style="border-top:1px solid var(--glass-border);">
-          <p class="text-xs" style="color:rgba(255,255,255,0.2);">© 2025 Nexus Technologies, Inc. All rights reserved.</p>
-          <p class="text-xs font-medium" style="color:rgba(255,255,255,0.25);">
-            Powered by Innovation
-            <span style="margin-left:6px;background:linear-gradient(90deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">✦</span>
-          </p>
-        </div>
+    <div class="por-row">
+      <div>
+        <div class="por-name">6. Rashi Porutham</div>
+        <div class="por-sub">Moon sign compatibility</div>
       </div>
-    </footer>
+      <div class="badge excel">Excellent ★</div>
+      <div class="por-desc">Dhanus (Sagittarius) and Vrishchika (Scorpio) are consecutive rashis — Scorpio is the 2nd from Sagittarius. In the South Indian system this gives a Vasya-like warmth; Fire-Water with Scorpio's depth and Sagittarius' vision is a powerful combo.</div>
+    </div>
 
-  </div><!-- /page -->
+    <div class="por-row">
+      <div>
+        <div class="por-name">7. Rasyadhipati</div>
+        <div class="por-sub">Rashi lord friendship</div>
+      </div>
+      <div class="badge match">Match ✓</div>
+      <div class="por-desc">Jupiter (Dhanus lord) and Mars (Vrishchika lord) share a friendly relationship in Vedic astrology — mutual respect, shared drive, and aligned goals.</div>
+    </div>
 
-  <!-- ─── SCROLL REVEAL SCRIPT ─────────────────────────────── -->
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => observer.observe(el));
-  </script>
+    <div class="por-row">
+      <div>
+        <div class="por-name">8. Vasya Porutham</div>
+        <div class="por-sub">Mutual attraction</div>
+      </div>
+      <div class="badge match">Match ✓</div>
+      <div class="por-desc">Dhanus has natural Vasya over Vrishchika — indicating strong mutual pull and a natural leader-nurturer dynamic in the relationship.</div>
+    </div>
 
+    <div class="por-row">
+      <div>
+        <div class="por-name">9. Rajju Porutham</div>
+        <div class="por-sub">Life & longevity bond</div>
+      </div>
+      <div class="badge match">Match ✓</div>
+      <div class="por-desc">Mula and Anuradha belong to different Rajju groups — a very important positive. No Rajju dosha, protecting the longevity of the marital bond.</div>
+    </div>
+
+    <div class="por-row">
+      <div>
+        <div class="por-name">10. Vedha Porutham</div>
+        <div class="por-sub">Freedom from obstacles</div>
+      </div>
+      <div class="badge match">Match ✓</div>
+      <div class="por-desc">Mula and Anuradha are not a Vedha pair — no nakshatra-level obstruction or affliction between them. The path is clear.</div>
+    </div>
+
+  </div>
+
+  <div class="divider"><span>✦</span></div>
+
+  <!-- Mula Nakshatra Note -->
+  <div class="warning-card">
+    <h3>⚠️ Mula Nakshatra — Important Consideration</h3>
+    <p>
+      Mula nakshatra (ruled by Ketu, deity Nirriti) traditionally carries what is called <strong>Mula Dosha</strong> — a belief that a child born in Mula, especially in the 1st pada, may bring challenges to the father-in-law's family after marriage. This is taken seriously in many South Indian and North Indian traditions. <br><br>
+      <strong>Remedies commonly advised:</strong> Consulting a qualified Jyotishi for shanti (pacification) puja, Ketu-related remedies, and checking the exact pada (quarter) of Mula in Yashwant's chart. If born in the 4th pada, the dosha is considered milder. This should be discussed openly with families and a priest before finalizing the match.
+    </p>
+  </div>
+
+  <!-- Detail Insights -->
+  <div class="d-card">
+    <h3><span>🔥</span> Rashi Analysis — Dhanus & Vrishchika</h3>
+    <p>
+      Yashwant's <span class="hl">Dhanus (Sagittarius)</span> brings philosophical depth, optimism, adventure, and expansive vision — ruled by Jupiter, the great benefic. Nikitha's <span class="hl">Vrishchika (Scorpio)</span> brings intensity, loyalty, emotional depth, and powerful transformation — ruled by Mars.
+      Together they form a deeply passionate and intellectually stimulating pair. Jupiter's wisdom balances Mars' intensity. Dhanus lifts Scorpio out of brooding; Scorpio gives Dhanus emotional anchoring.
+    </p>
+    <div class="tags">
+      <span class="tag">Jupiter ↔ Mars friendly</span>
+      <span class="tag">Depth meets vision</span>
+      <span class="tag">Intense & loyal bond</span>
+    </div>
+  </div>
+
+  <div class="d-card">
+    <h3><span>⭐</span> Anuradha Nakshatra — Nikitha's Strength</h3>
+    <p>
+      <span class="hl">Anuradha</span> (ruled by Saturn, deity Mitra — god of friendship) is one of the most devoted and relationship-oriented nakshatras. People born under Anuradha are known for unshakeable loyalty, deep emotional bonds, organizational ability, and the capacity to maintain friendships and partnerships through all difficulties. Nikitha will bring steadiness, commitment, and nurturing warmth to this marriage.
+    </p>
+    <div class="tags">
+      <span class="tag">Extremely loyal & devoted</span>
+      <span class="tag">Saturn's discipline</span>
+      <span class="tag">Friendship-based love</span>
+    </div>
+  </div>
+
+  <div class="d-card">
+    <h3><span>🌟</span> Mula Nakshatra — Yashwant's Energy</h3>
+    <p>
+      <span class="hl">Mula</span> (ruled by Ketu, deity Nirriti) is the nakshatra of roots, investigation, and transformation. Mula natives are deeply philosophical, truth-seeking, determined, and often unconventional. They have the power to dig deep and rebuild from roots up. Yashwant will bring intensity, originality, and a searching intelligence to the relationship — qualities that Anuradha's stable devotion complements beautifully.
+    </p>
+    <div class="tags">
+      <span class="tag">Philosophical & deep</span>
+      <span class="tag">Ketu's transformation</span>
+      <span class="tag">Unconventional strength</span>
+    </div>
+  </div>
+
+  <div class="d-card">
+    <h3><span>💡</span> Gana Difference — Navigating It</h3>
+    <p>
+      The only notable compatibility tension is the <span class="hl">Rakshasa (Yashwant) vs Deva (Nikitha)</span> Gana difference. In practice this means Yashwant may be more direct, assertive, and unconventional while Nikitha may prefer harmony, structure, and idealism. When boy is Rakshasa and girl is Deva, most acharyas consider it conditionally acceptable — but both must consciously work on not letting stubbornness clash with sensitivity. This is very workable with communication.
+    </p>
+    <div class="tags">
+      <span class="tag">Conditionally acceptable</span>
+      <span class="tag">Needs communication</span>
+      <span class="tag">Mutual respect essential</span>
+    </div>
+  </div>
+
+  <!-- Verdict -->
+  <div class="verdict">
+    <h3>✦ Astrologer's Verdict ✦</h3>
+    <p>
+      With a score of <strong style="color:var(--amber-light)">26/36 (Uttama Madhyama)</strong>, this is a <strong style="color:var(--amber-light)">good and favorable match</strong> above the traditional threshold of 18. All critical poruthams — Rajju, Vedha, Mahendra, Sthree Deergha, Rasyadhipati — are fully matched. The Jupiter–Mars friendship between rashi lords is a powerful foundation. Anuradha's devotion and Mula's depth make for a spiritually rich and emotionally intense union.
+      <br><br>
+      The primary consideration is <strong style="color:#f0a0a0">Mula Dosha</strong> — families should consult a Jyotishi to assess Yashwant's exact Mula pada and perform appropriate shanti rituals if required. With this addressed, this pairing holds strong potential for a deep, lasting, and meaningful life together.
+    </p>
+  </div>
+
+  <div class="footer">
+    <p>Based on classical <strong>South Indian Vedic Jyotisha</strong> principles (Dasa Porutham system).</p>
+    <p style="margin-top:8px;">For binding decisions, consult a qualified Jyotishi for a full horoscope analysis including Mangal dosha, navamsa chart, and dasha compatibility.</p>
+    <p style="margin-top:12px; opacity:0.4; font-size:0.8rem;">✦ Prepared for Yashwant &amp; Nikitha ✦</p>
+  </div>
+
+</div>
 </body>
 </html>
